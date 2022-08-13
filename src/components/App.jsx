@@ -1,9 +1,9 @@
-import CryptoList from "./CryptoList/CryptoList";
+import Filter from 'components/Filter/Filter'
 
 export const App = () => {
   return (
     <div>
-      <CryptoList/>
+      <Filter/>
     </div>
   );
 };

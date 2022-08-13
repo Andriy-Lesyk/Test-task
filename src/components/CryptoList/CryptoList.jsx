@@ -1,21 +1,30 @@
-import React from 'react'
-import cryptoArray from './crypto.json'
-import {CryptoSheet, CryptoItem, Title, Price, Number} from './CryptoList.styled'
+import React from 'react';
+import {
+  CryptoSheet,
+  CryptoItem,
+  Title,
+  Price,
+  Number,
+} from './CryptoList.styled';
 
-function CryptoList() {
+function CryptoList({ cryptoArrayFiltered }) {
   return (
     <div>
-        <CryptoSheet>
-            {cryptoArray.data.map(crypt=>(
-                <CryptoItem key={crypt.id}>
-                    <Number>{(cryptoArray.data.indexOf(crypt))+1}.</Number>
-                    <Title>{crypt.symbol}</Title>
-                    <Price>{crypt.prices[0].toFixed(3)}</Price>
-                </CryptoItem>
-            ))}
-        </CryptoSheet>
+      <CryptoSheet>
+        {cryptoArrayFiltered.length>0 ? (
+          cryptoArrayFiltered.map(crypt => (
+            <CryptoItem key={crypt.id}>
+              <Number>{cryptoArrayFiltered.indexOf(crypt) + 1}.</Number>
+              <Title>{crypt.symbol}</Title>
+              <Price>${crypt.prices[0].toFixed(3)}</Price>
+            </CryptoItem>
+          ))
+        ) : (
+          <p>Try another letter</p>
+        )}
+      </CryptoSheet>
     </div>
-  )
+  );
 }
 
-export default CryptoList
+export default CryptoList;
