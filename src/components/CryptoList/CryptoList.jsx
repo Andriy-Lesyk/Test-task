@@ -1,10 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   CryptoSheet,
   CryptoItem,
-  Title,
-  Price,
-  Number,
+  Information,
 } from './CryptoList.styled';
 
 function CryptoList({ cryptoArrayFiltered }) {
@@ -14,9 +13,9 @@ function CryptoList({ cryptoArrayFiltered }) {
         {cryptoArrayFiltered.length>0 ? (
           cryptoArrayFiltered.map(crypt => (
             <CryptoItem key={crypt.id}>
-              <Number>{cryptoArrayFiltered.indexOf(crypt) + 1}.</Number>
-              <Title>{crypt.symbol}</Title>
-              <Price>${crypt.prices[0].toFixed(3)}</Price>
+              <Information>{cryptoArrayFiltered.indexOf(crypt) + 1}.</Information>
+              <Information>{crypt.symbol}</Information>
+              <Information>${crypt.prices[0].toFixed(3)}</Information>
             </CryptoItem>
           ))
         ) : (
@@ -26,5 +25,14 @@ function CryptoList({ cryptoArrayFiltered }) {
     </div>
   );
 }
-
+CryptoList.propTypes = {
+  
+  cryptoArrayFiltered: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      symbol: PropTypes.string.isRequired,
+      prices: PropTypes.array.isRequired,
+    })
+  ),
+};
 export default CryptoList;

@@ -1,24 +1,33 @@
-import React, {useState} from 'react'
-import cryptoArray from './crypto.json'
+import React, { useState } from 'react';
+import cryptoArray from './crypto.json';
 import CryptoList from 'components/CryptoList/CryptoList';
-import {Input} from './Filter.styled'
+import CryptoLogo from '../../images/cryptocurrency.png'
+import { Input, Logo, Container } from './Filter.styled';
 
 function Filter() {
-    const [filter, setFilter] = useState('');
-    
-   const changeFilter = (e) => {
+  const [filter, setFilter] = useState('');
+
+  const changeFilter = e => {
     setFilter(e.currentTarget.value);
-    
   };
-  let cryptoArrayFiltered= cryptoArray.data;
-  filter&&(cryptoArrayFiltered = cryptoArray.data.filter(crypt=> crypt.symbol[0]===filter.toLocaleUpperCase()))
-  
+  let cryptoArrayFiltered = cryptoArray.data;
+  filter &&
+    (cryptoArrayFiltered = cryptoArray.data.filter(
+      crypt => crypt.symbol[0] === filter.toLocaleUpperCase()
+    ));
+
   return (
-    <div>
-        <Input  value={filter} onChange={changeFilter} type="text"  placeholder='Search...' />
-        <CryptoList cryptoArrayFiltered={cryptoArrayFiltered}/>
-    </div>
-  )
+    <Container>
+      <Logo src={CryptoLogo}/>
+      <Input
+        value={filter}
+        onChange={changeFilter}
+        type="text"
+        placeholder="Search..."
+      />
+      <CryptoList cryptoArrayFiltered={cryptoArrayFiltered} />
+    </Container>
+  );
 }
 
-export default Filter
+export default Filter;
